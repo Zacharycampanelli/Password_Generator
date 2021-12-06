@@ -1,24 +1,79 @@
-var flags = [
-  { flagLowerCase: false },
-  { flagUpperCase: false },
-  { flagNumeric: false },
-  { flagSpecialCharacter: false },
-  { minLength: 0 },
-  { maxLength: 128 },
-];
-var minLength = 8;
-var maxLength = 128;
+var flags = {
+  lowerCase: false,
+  upperCase: false,
+  numeric: false,
+  special: false,
+  minLength: 0,
+  maxLength: 20,
+};
+
+{
+  ("flagLowerCase");
+}
+
 var lengthFinal;
 var answer;
 var password = [];
 
-// for (var i = 0; i < flags.length; i++) {
-//   switch(i) {
-//     case '0':
-//       window.prompt(Include Lowercase? (Y/N));
-//       break;
-// }
-//   }
+const lower = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
+const upper = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+const nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const special = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
+var possibilities = [];
 
 function getLength(min, max) {
   console.log(min);
@@ -29,49 +84,46 @@ function getLength(min, max) {
 
 // Assignment code here
 function generatePassword() {
-  // console.log(flags[0]);
-  // answer = window.prompt("Do you want lowercase characters?");
-  // if (answer == "yes") {
-  //   flags[0] = true;
-  //   console.log(flags[0]);
-  // }
+  answer = window.prompt("Do you want lowercase characters?");
+  if (answer == "yes") {
+    flags.lowerCase = true;
+    possibilities.push(...lower);
+  }
+  
 
-  // answer = window.prompt("Do you want uppercase characters?");
-  // if (answer == "yes") {
-  //   flags[1] = true;
-  //   console.log(flags[1]);
-  // }
+  answer = window.prompt("Do you want uppercase characters?");
+  if (answer == "yes") {
+    flags.upperCase = true;
+    possibilities.push(...upper);
+  }
+  
 
-  // answer = window.prompt("Do you want Numeric characters?");
-  // if (answer == "yes") {
-  //   flags[2] = true;
-  //   console.log(flags[2]);
-  // }
+  for (i = 0; i < possibilities.length; i++) console.log(possibilities[i]);
 
-  // answer = window.prompt("Do you want Special characters?");
-  // if (answer == "yes") {
-  //   flags[3] = true;
-  //   console.log(flags[3]);
-  // }
+  answer = window.prompt("Do you want Numeric characters?");
+  if (answer == "yes") {
+    flags.numeric = true;
+    possibilities.push(...numeric);
+  }
+
+  answer = window.prompt("Do you want Special characters?");
+  if (answer == "yes") {
+    flags.special = true;
+    possibilities.push(...special);
+  }
 
   answer = window.prompt("What is the minimum length of the password?");
-  flags[4] = parseInt(answer);
-  console.log(flags[4]);
+  flags.minLength = parseInt(answer);
+  console.log(flags.minLength);
 
   answer = window.prompt("What is the maximum length of the password?");
-  flags[5] = parseInt(answer);
-  console.log(flags[5]);
+  flags.maxLength = parseInt(answer);
+  console.log(flags.maxLength);
 
-  lengthFinal = getLength(flags[4], flags[5]);
+  lengthFinal = getLength(flags.minLength, flags.maxLength);
   console.log(lengthFinal);
 
-  for (i = 0; i < lengthFinal; i++) {
-    password.push("y");
-  }
-
-  for (i = 0; i < password.length; i++) {
-    console.log(password[i]);
-  }
+  // switch
 }
 
 // Get references to the #generate element
