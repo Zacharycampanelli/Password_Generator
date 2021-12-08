@@ -7,12 +7,8 @@ var flags = {
   maxLength: 20,
 };
 
-{
-  ("flagLowerCase");
-}
-
 var lengthFinal;
-var answer;
+
 var password = [];
 
 const lower = [
@@ -71,10 +67,11 @@ const upper = [
   "Y",
   "Z",
 ];
-const nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const numeric = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const special = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
 var possibilities = [];
 
+// Returns a random length between the specified numbers for the password
 function getLength(min, max) {
   console.log(min);
   min = Math.ceil(min);
@@ -82,23 +79,25 @@ function getLength(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-// Assignment code here
+// Random number to return a random index in an array
+function getRandom(len) {
+  return Math.floor(Math.random() * len);
+}
+
+// Function to generate the password
 function generatePassword() {
+  // User Prompts
   answer = window.prompt("Do you want lowercase characters?");
   if (answer == "yes") {
     flags.lowerCase = true;
     possibilities.push(...lower);
   }
-  
 
   answer = window.prompt("Do you want uppercase characters?");
   if (answer == "yes") {
     flags.upperCase = true;
     possibilities.push(...upper);
   }
-  
-
-  for (i = 0; i < possibilities.length; i++) console.log(possibilities[i]);
 
   answer = window.prompt("Do you want Numeric characters?");
   if (answer == "yes") {
@@ -120,10 +119,48 @@ function generatePassword() {
   flags.maxLength = parseInt(answer);
   console.log(flags.maxLength);
 
+  // Create random length for password
   lengthFinal = getLength(flags.minLength, flags.maxLength);
-  console.log(lengthFinal);
 
-  // switch
+  // Generates password
+  console.log(flags.lowerCase, flags.upperCase, flags.numeric, flags.special);
+  for (i = 0; i < lengthFinal; i++) {
+    password.push(possibilities[getRandom(possibilities.length)]);
+  }
+
+  // Inserts a random character from each prompt option into the password if that option was selected
+  var x;
+  if (flags.lowerCase) {
+    x = getRandom(password.length);
+    console.log(x);
+    password[x] = lower[getRandom(lower.length)];
+    console.log(password[x]);
+  }
+
+  if (flags.upperCase) {
+    x = getRandom(password.length);
+    console.log(x);
+    password[x] = upper[getRandom(upper.length)];
+    console.log(password[x]);
+  }
+
+  if (flags.numeric) {
+    x = getRandom(password.length);
+    console.log(x);
+    password[x] = numeric[getRandom(numeric.length)];
+    console.log(password[x]);
+  }
+
+  if (flags.special) {
+    x = getRandom(password.length);
+    console.log(x);
+    password[x] = special[getRandom(special.length)];
+    console.log(password[x]);
+  }
+
+  // Return password
+  console.log(password);
+  return password.join("");
 }
 
 // Get references to the #generate element
