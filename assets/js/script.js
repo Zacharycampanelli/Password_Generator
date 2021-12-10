@@ -10,6 +10,7 @@ var flags = {
 var lengthFinal;
 
 var password = [];
+var possibilities = [];
 
 const lower = [
   "a",
@@ -69,7 +70,6 @@ const upper = [
 ];
 const numeric = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const special = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
-var possibilities = [];
 
 // Returns a random length between the specified numbers for the password
 function getLength(min, max) {
@@ -88,36 +88,78 @@ function getRandom(len) {
 function generatePassword() {
   // User Prompts
   answer = window.prompt("Do you want lowercase characters?");
+  answer = answer.toLowerCase();
   if (answer == "yes") {
     flags.lowerCase = true;
     possibilities.push(...lower);
+  } else if (answer == "no") {
+    flags.lowerCase = false;
+  } else {
+    alert("invalid response");
+    return false;
   }
 
   answer = window.prompt("Do you want uppercase characters?");
+  answer = answer.toLowerCase();
   if (answer == "yes") {
     flags.upperCase = true;
     possibilities.push(...upper);
+  } else if (answer == "no") {
+    flags.upperCase = false;
+  } else {
+    alert("invalid response");
+    return false;
   }
 
   answer = window.prompt("Do you want Numeric characters?");
+  answer = answer.toLowerCase();
   if (answer == "yes") {
     flags.numeric = true;
     possibilities.push(...numeric);
+  } else if (answer == "no") {
+    flags.numeric = false;
+  } else {
+    alert("invalid response");
+    return false;
   }
 
   answer = window.prompt("Do you want Special characters?");
+  answer = answer.toLowerCase();
   if (answer == "yes") {
     flags.special = true;
     possibilities.push(...special);
+  } else if (answer == "no") {
+    flags.special = false;
+  } else {
+    alert("invalid response");
+    return false;
   }
 
-  answer = window.prompt("What is the minimum length of the password?");
+  if (
+    !flags.lowerCase &&
+    !flags.upperCase &&
+    !flags.numeric &&
+    !flags.special
+  ) {
+    alert("Error: At least one option must be selected");
+    return false;
+  }
+
+  answer = window.prompt(
+    "What is the minimum length of the password? (8 character min)"
+  );
   flags.minLength = parseInt(answer);
-  console.log(flags.minLength);
+  if (!Number.isInteger(flags.minLength) || flags.minLength < 8) {
+    alert("invalid response");
+    return false;
+  }
 
   answer = window.prompt("What is the maximum length of the password?");
   flags.maxLength = parseInt(answer);
-  console.log(flags.maxLength);
+  if (!Number.isInteger(flags.maxLength) || flags.minLength > flags.maxLength) {
+    alert("invalid response");
+    return false;
+  }
 
   // Create random length for password
   lengthFinal = getLength(flags.minLength, flags.maxLength);
