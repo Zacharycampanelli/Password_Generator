@@ -3,8 +3,8 @@ var flags = {
   upperCase: false,
   numeric: false,
   special: false,
-  minLength: 0,
-  maxLength: 20,
+  minLength: 8,
+  maxLength: 128,
 };
 
 var lengthFinal;
@@ -73,7 +73,6 @@ const special = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
 
 // Returns a random length between the specified numbers for the password
 function getLength(min, max) {
-  console.log(min);
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
@@ -145,6 +144,7 @@ function generatePassword() {
     return false;
   }
 
+  // Prompt User for length of password
   answer = window.prompt(
     "What is the minimum length of the password? (8 character min)"
   );
@@ -154,9 +154,15 @@ function generatePassword() {
     return false;
   }
 
-  answer = window.prompt("What is the maximum length of the password?");
+  answer = window.prompt(
+    "What is the maximum length of the password? (128 character max"
+  );
   flags.maxLength = parseInt(answer);
-  if (!Number.isInteger(flags.maxLength) || flags.minLength > flags.maxLength) {
+  if (
+    !Number.isInteger(flags.maxLength) ||
+    flags.minLength > flags.maxLength ||
+    flags.maxLength > 128
+  ) {
     alert("invalid response");
     return false;
   }
@@ -165,7 +171,6 @@ function generatePassword() {
   lengthFinal = getLength(flags.minLength, flags.maxLength);
 
   // Generates password
-  console.log(flags.lowerCase, flags.upperCase, flags.numeric, flags.special);
   for (i = 0; i < lengthFinal; i++) {
     password.push(possibilities[getRandom(possibilities.length)]);
   }
@@ -174,34 +179,25 @@ function generatePassword() {
   var x;
   if (flags.lowerCase) {
     x = getRandom(password.length);
-    console.log(x);
     password[x] = lower[getRandom(lower.length)];
-    console.log(password[x]);
   }
 
   if (flags.upperCase) {
     x = getRandom(password.length);
-    console.log(x);
     password[x] = upper[getRandom(upper.length)];
-    console.log(password[x]);
   }
 
   if (flags.numeric) {
     x = getRandom(password.length);
-    console.log(x);
     password[x] = numeric[getRandom(numeric.length)];
-    console.log(password[x]);
   }
 
   if (flags.special) {
     x = getRandom(password.length);
-    console.log(x);
     password[x] = special[getRandom(special.length)];
-    console.log(password[x]);
   }
 
   // Return password
-  console.log(password);
   return password.join("");
 }
 
