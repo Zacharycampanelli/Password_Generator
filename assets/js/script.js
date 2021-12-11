@@ -7,8 +7,6 @@ var flags = {
   maxLength: 128,
 };
 
-var lengthFinal;
-
 var possibilities = [];
 
 const lower = [
@@ -85,6 +83,8 @@ function getRandom(len) {
 // Function to generate the password
 function generatePassword() {
   var password = [];
+
+  var lengthFinal;
   // User Prompts
   answer = window.prompt("Do you want lowercase characters?");
   answer = answer.toLowerCase();
@@ -210,7 +210,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
 }
-
 
 // Add event listener to generate button
 
