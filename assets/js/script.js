@@ -86,7 +86,9 @@ function generatePassword() {
 
   var lengthFinal;
   // User Prompts
-  answer = window.prompt("Do you want lowercase characters?");
+  answer = window.prompt(
+    "Do you want lowercase characters? Type 'yes' or 'no'"
+  );
   answer = answer.toLowerCase();
   if (answer == "yes") {
     flags.lowerCase = true;
@@ -98,7 +100,9 @@ function generatePassword() {
     return false;
   }
 
-  answer = window.prompt("Do you want uppercase characters?");
+  answer = window.prompt(
+    "Do you want uppercase characters? Type 'yes' or 'no'"
+  );
   answer = answer.toLowerCase();
   if (answer == "yes") {
     flags.upperCase = true;
@@ -110,7 +114,7 @@ function generatePassword() {
     return false;
   }
 
-  answer = window.prompt("Do you want Numeric characters?");
+  answer = window.prompt("Do you want Numeric characters? Type 'yes' or 'no'");
   answer = answer.toLowerCase();
   if (answer == "yes") {
     flags.numeric = true;
@@ -122,7 +126,7 @@ function generatePassword() {
     return false;
   }
 
-  answer = window.prompt("Do you want Special characters?");
+  answer = window.prompt("Do you want Special characters? Type 'yes' or 'no'");
   answer = answer.toLowerCase();
   if (answer == "yes") {
     flags.special = true;
@@ -155,7 +159,7 @@ function generatePassword() {
   }
 
   answer = window.prompt(
-    "What is the maximum length of the password? (128 character max"
+    "What is the maximum length of the password? (128 character max)"
   );
   flags.maxLength = parseInt(answer);
   if (

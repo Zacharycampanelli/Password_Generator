@@ -14,6 +14,11 @@ Creates a string of characters following the conditions the User asks for to cre
 - A random password is created by matching the criteria the user wants to characters used in the password, which
   is then displayed in the textfield area on the HTML page
 
+## Instructions
+
+- For the prompts asking the user which characters they would like in the password, please type either 'yes' or 'no' (without the quotes)
+- For the minimum and maximum length prompts, please enter answers between 8 and 128 inclusive.
+
 ## Screenshots
 
 ![Screen Shot 1](assets/images/Screenshot_1.png)
